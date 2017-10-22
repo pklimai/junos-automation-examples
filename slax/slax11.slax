@@ -1,0 +1,41 @@
+version 1.1;
+
+ns junos = "http://xml.juniper.net/junos/*/junos";
+ns xnm = "http://xml.juniper.net/xnm/1.1/xnm";
+ns jcs = "http://xml.juniper.net/junos/commit-scripts/1.0";
+
+ns xutil extension = "http://xml.libslax.org/xutil";
+ns bit extension = "http://xml.libslax.org/bit";
+ns curl extension = "http://xml.libslax.org/curl";
+
+import "../import/junos.xsl";
+
+match / {
+  <op-script-results> {
+
+    var $c = 10;
+    <output> "Usual var c = " _ $c;
+    <output>;
+
+    mvar $m = 1;
+    <output> "mvar initial value = " _ $m;
+
+    set $m = 2;
+    <output> "mvar changed with 'set' value = " _ $m;
+
+    append $m += "345"; 
+    <output> "mvar value after appending '345' = " _ $m;
+    <output>;
+
+    for $i (1 ... 5) {
+      <output> "for loop: " _ $i;
+    }
+
+    <output>;
+    <output> "Bit AND result = " _ bit:and("10101010", 128);
+
+    <output>;
+    <output> "xml-to-string: " _ xutil:xml-to-string(/op-script-input/junos-context/product);
+
+  }
+}
