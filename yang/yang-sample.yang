@@ -1,0 +1,26 @@
+module yang-sample {
+  namespace "http://yang.example.com/sample";
+  prefix sample;
+  organization "ACME, inc.";
+  description "Sample YANG module";
+
+  typedef ipaddr {
+    type string;
+  }
+  
+  leaf config-root {
+    description "Root element";
+    type string; 
+  }
+  
+  list sample-list {
+    key name;
+    ordered-by user;
+    leaf name {
+      type string;
+    }
+    leaf other-leaf {
+      type string;
+    }
+  }
+}
