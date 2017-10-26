@@ -3,7 +3,9 @@
 #### To install pyang:
 
 sudo pip install pyang
+
 sudo apt-get install xsltproc
+
 sudo apt-get install libxml2-utils
 
 #### To validate a particular YANG model:
