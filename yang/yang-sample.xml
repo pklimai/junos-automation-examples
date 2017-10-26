@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<data xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+
+  <device-hostname xmlns="http://yang.example.com/sample"> "My device" </device-hostname>
+
+  <dns-servers xmlns="http://yang.example.com/sample"> "8.8.8.8" </dns-servers>
+  <dns-servers xmlns="http://yang.example.com/sample"> "4.2.2.2" </dns-servers>
+
+  <system xmlns="http://yang.example.com/sample">
+    <services>
+      <ssh>
+        <enabled> true </enabled>
+      </ssh>
+    </services>
+  </system>
+  
+  <interface-list xmlns="http://yang.example.com/sample">
+    <name> "ge-1/1/0" </name>
+    <address> "10.1.0.111/24" </address>
+  </interface-list>
+
+  <interface-list xmlns="http://yang.example.com/sample">
+    <name> "ge-1/2/0" </name>
+    <address> "10.2.0.111/24" </address>
+  </interface-list>
+
+</data>
