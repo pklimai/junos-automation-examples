@@ -8,19 +8,36 @@ module yang-sample {
     type string;
   }
   
-  leaf config-root {
-    description "Root element";
+  leaf device-hostname {
+    description "Device host name string";
     type string; 
+    mandatory true;
   }
   
-  list sample-list {
+  leaf-list dns-servers {
+    description "DNS servers IP or FQDN";
+    type string;
+  }
+
+  container system {
+    container services {
+      container ssh {
+        leaf enabled {
+          type boolean;
+        }
+      }
+    }
+  }
+
+  list interface-list {
     key name;
     ordered-by user;
+    description "Device interfaces and their IP addrs.";
     leaf name {
       type string;
     }
-    leaf other-leaf {
-      type string;
+    leaf address {
+      type ipaddr;
     }
   }
 }
