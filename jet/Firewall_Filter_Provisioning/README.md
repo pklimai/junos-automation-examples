@@ -1,13 +1,17 @@
 ## Running JET Python application off-box
 
-This directory contains an example code for off-box Junos Extension Toolkit (JET) application running on 
-Ubuntu server, and notes how to run it. The application code is taken from 
-https://www.juniper.net/documentation/en_US/jet17.2/information-products/pathway-pages/product/17.2/index.html
+This directory contains an example code for off-box "request-response" Juniper Extension Toolkit (JET) application running on 
+Ubuntu server, and notes how to run it. 
+
+Note: Example for JET "notification" app is contained in the other folder of this repository, jet/JET_Notification_App.
+
+The application code (sampleFirewallApp.py) is taken from [JET documentation](
+https://www.juniper.net/documentation/en_US/jet17.2/information-products/pathway-pages/product/17.2/index.html)
 with some very minor modifications (in particular, adapted for Python 3).
 
 Topology:
 ```
-[ Ubuntu VM ] -------------- [ vMX-1 ]
+[ Ubuntu VM ] -------------- [ vMX-1, Junos 17.1 ]
 ```
 
 
@@ -27,7 +31,7 @@ sudo pip install grpcio
 tar vzxf jet-idl-17.3R1.10.tar.gz
 ```
 
-(unpacks to "proto" subdirectory).
+(unpacks to "proto" subdirectory). Note I use IDLs for Junos 17.3 and vMX runs 17.1 - but it still works.
 
 4) Compile IDLs:
 ```
