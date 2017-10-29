@@ -5,9 +5,15 @@ Ubuntu server, and notes how to run it. The application code is taken from
 https://www.juniper.net/documentation/en_US/jet17.2/information-products/pathway-pages/product/17.2/index.html
 with some very minor modifications (in particular, adapted for Python 3).
 
-How to run it:
+Topology:
+```
+[ Ubuntu VM ] -------------- [ vMX-1 ]
+```
 
-1) Configure vMX (or physical MX) device similar to as shown in vMX-1.config file.
+
+How to run JET application (sampleFirewallApp.py):
+
+1) Configure vMX (or you can use physical MX) device similar to as provided in vMX-1.config file. The critical part is to enable gRPC in services.
 
 2) On Ubuntu host, install gRPC library (note 1.6.0 version):
 ```
