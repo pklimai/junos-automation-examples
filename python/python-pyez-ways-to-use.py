@@ -14,7 +14,7 @@ pprint(dev.facts)
 print("CLI-cheat. Do not use for normal automation scripting:")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
-dev.cli("show interfaces ge* terse", warning=False)
+print(dev.cli("show interfaces ge* terse", warning=False))
 
 # --------------------------------------------------------------
 
