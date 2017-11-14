@@ -1,0 +1,16 @@
+---
+  - name: Hello World!
+    hosts: vsrx
+    roles:
+     - Juniper.junos
+    connection: local
+    gather_facts: no
+    
+    tasks:
+    - name: Get Junos device information
+      junos_get_facts:
+        host={{ inventory_hostname }}
+      register: junos
+   
+    - name: Print Junos facts
+      debug: msg="{{junos.facts}}"
