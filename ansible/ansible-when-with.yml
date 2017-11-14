@@ -1,0 +1,29 @@
+---
+  - name: With / when play
+    hosts: 
+      - vsrx
+      - vsrx2
+    roles:
+      - Juniper.junos
+    connection: local
+    gather_facts: no
+    
+    tasks:
+    - name: Get device information for particular host
+      junos_get_facts:
+        host={{ inventory_hostname }}
+        user=lab
+        passwd=lab123 
+      register: junos
+      # If we comment out 'when', it repeats the same 4 times
+      when: inventory_hostname == item.host
+      with_items:
+       - { host: '10.254.0.35' }
+       - { host: '10.254.0.1' }
+       - { host: '10.254.0.37' }
+       - { host: '10.254.0.2' }
+   
+    - name: Print Junos facts
+      debug: 
+        msg: "{{ junos }}"
+ 
