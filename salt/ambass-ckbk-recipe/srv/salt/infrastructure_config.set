@@ -1,0 +1,9 @@
+delete system ntp
+{% for ntp_server in pillar.ntp_servers %}
+set system ntp server {{ ntp_server }}
+{% endfor %}
+
+delete system name-server
+{% for dns_server in pillar.dns_servers %}
+set system name-server {{ dns_server }}
+{% endfor %}
