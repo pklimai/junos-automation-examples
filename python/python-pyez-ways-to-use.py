@@ -2,6 +2,7 @@
 
 from jnpr.junos import Device
 from pprint import pprint
+from lxml.etree import dump
 
 print("Open connection and print facts:")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
@@ -20,7 +21,7 @@ print(dev.cli("show interfaces ge* terse", warning=False))
 
 print("Using XML RPC to get info, then parse XML reply:")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-lxml = dev.rpc.get_arp_table_information()
+lxml = dev.rpc.get_arp_table_information()                   # (no_resolve=True, normalize=True)
 arp_table = lxml.findall('arp-table-entry')
 
 for entry in arp_table:
