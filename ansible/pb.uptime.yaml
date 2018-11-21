@@ -1,0 +1,45 @@
+---
+- name: Get device uptime
+  hosts: 
+    - all
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars:
+    username: lab
+    password: lab123
+
+### A more secure approach would be:
+###
+# vars_prompt:
+#   - name: username
+#     prompt: Junos Username
+#     private: no
+#   - name: password
+#     prompt: Junos Password
+#     private: yes
+
+  tasks:
+    - juniper_junos_command:
+        commands:
+          - show system uptime
+        provider:
+          host: "{{ ansible_host }}"
+          port: 22
+          user: "{{ username }}"
+          passwd: "{{ password }}"
+      register: uptime
+  
+    - name: display uptimes
+      debug:
+        var: uptime.stdout_lines
+
+### Note: uptime.stdout_lines is a shortcut to this:
+#       var: uptime['stdout_lines']
+
+### Note: you can also pass module parameters this way:
+#   - name: display uptimes
+#     debug: var=uptime.stdout_lines
+

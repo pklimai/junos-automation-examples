@@ -1,0 +1,39 @@
+---
+- name: Provision DNS and commit confirmed
+  hosts: 
+    - all
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars:
+    username: lab
+    password: lab123
+    provider_vars:          
+      host: "{{ ansible_host }}"
+      user: "{{ username }}"
+      passwd: "{{ password }}"
+      timeout: 60
+
+  tasks:
+    - name: Provision DNS configuration
+      juniper_junos_config:
+        load: replace
+        src: "configs/nameserver.conf"
+        provider: "{{ provider_vars }}"
+        confirmed: 5
+        comment: Ansible provision DNS config, commit confirmed
+        diff: yes
+      register: commit_results
+      notify: confirm commit
+  
+    - debug: var=commit_results.diff_lines 
+
+  handlers:         
+    - name: confirm commit
+      juniper_junos_config:
+        provider: "{{ provider_vars }}"
+        comment: "Confirming previous commit"
+        commit: yes
+

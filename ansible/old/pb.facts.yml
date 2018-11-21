@@ -1,0 +1,28 @@
+---
+  - name: Collect and print facts
+    hosts: vmx_devices
+    roles:
+     - Juniper.junos
+    connection: local
+    gather_facts: no
+    
+    vars_prompt:
+     - name: USERNAME
+       prompt: User name
+       private: no
+     - name: DEVICE_PASSWORD
+       prompt: Device password
+       private: yes
+   
+    tasks:
+    - name: Get Junos device information
+      junos_get_facts:
+        host={{ inventory_hostname }}
+        user={{ USERNAME }}
+        passwd={{ DEVICE_PASSWORD }} 
+      register: junos
+   
+    - name: Print Junos facts
+      debug:
+        msg: "{{ junos.facts }}"
+ 
