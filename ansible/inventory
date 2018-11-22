@@ -1,3 +1,7 @@
-vMX-1 ansible_host=10.254.0.41
-vMX-2 ansible_host=10.254.0.42
+vMX-1
+vMX-2
+
+[vMX]
+vMX-1 
+vMX-2
 

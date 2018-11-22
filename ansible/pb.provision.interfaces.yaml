@@ -1,0 +1,51 @@
+---
+- name: Provision interfaces using Jinja template
+  hosts: 
+    - vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars:
+    configs_dir: tmp
+    # Note how vars define here are generally device-specific:
+    conf_file: "{{ configs_dir }}/{{ inventory_hostname }}_interfaces.conf"
+    username: lab
+    password: lab123
+    provider_vars:          
+      host: "{{ ansible_host }}"
+      user: "{{ username }}"
+      passwd: "{{ password }}"
+      timeout: 60
+
+  tasks:
+    - name: Check directory with generated configs
+      file:
+        path: "{{ configs_dir }}"
+        state: directory
+      run_once: yes
+
+    - name: Generate interface config from template
+      template:
+        src: templates/interfaces.j2
+        dest: "{{ conf_file }}"
+
+#     - fail: msg="Early exit to debug template"
+
+    - name: Provision configuration
+      juniper_junos_config:
+        load: replace
+        src: "{{ conf_file }}"
+        provider: "{{ provider_vars }}"
+        diff: yes
+      register: commit_results
+  
+    - name: Print config diff
+      debug: var=commit_results.diff_lines 
+
+    - name: Cleanup config files
+      file: 
+        path: "{{ conf_file }}"
+        state: absent
+
