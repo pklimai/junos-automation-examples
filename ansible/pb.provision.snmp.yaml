@@ -1,5 +1,5 @@
 ---
-- name: Provision interfaces using Jinja template
+- name: Provision SNMP
   hosts: 
     - vMX
   roles:
@@ -10,7 +10,7 @@
   vars:
     configs_dir: tmp
     # Note how vars define here are generally device-specific:
-    conf_file: "{{ configs_dir }}/{{ inventory_hostname }}_interfaces.conf"
+    conf_file: "{{ configs_dir }}/{{ inventory_hostname }}_snmp.conf"
     username: lab
     password: lab123
     provider_vars:          
@@ -25,10 +25,12 @@
         path: "{{ configs_dir }}"
         state: directory
       run_once: yes
+      # This is optional:
+      delegate_to: localhost
 
     - name: Generate interface config from template
       template:
-        src: templates/interfaces.j2
+        src: templates/snmp.j2
         dest: "{{ conf_file }}"
 
 #     - fail: msg="Early exit to debug template"

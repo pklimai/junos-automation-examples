@@ -2,6 +2,20 @@ vMX-1
 vMX-2
 
 [vMX]
-vMX-1 
+vMX-[1:2] 
+
+[first_office]
+vMX-1
+
+[second_office]
 vMX-2
+
+[all_offices:children]
+first_office
+second_office
+
+# Check host list with commands like: 
+#   ansible all_offices --list-hosts
+
+# Note: there is always a predefined "all" group you can use
 

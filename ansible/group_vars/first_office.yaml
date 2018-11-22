@@ -1,0 +1,4 @@
+snmp_data:
+  location: Office number one
+  community: public
+
