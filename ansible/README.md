@@ -25,8 +25,8 @@ ansible-playbook pb.uptime.yaml --limit=@pb.uptime.retry
 
 Vault commands (use lab123 as password):
 ```
-ansible-vault encrypt pb.facts.vault.yaml
-ansible-vault view pb.facts.vault.yaml
-ansible-playbook pb.facts.vault.yaml --ask-vault-pass
+ansible-vault encrypt group_vars/all.yaml
+ansible-vault view group_vars/all.yaml
+ansible-playbook pb.facts.vault-vars.yaml --ask-vault-pass
 ```
 

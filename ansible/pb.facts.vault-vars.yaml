@@ -1,0 +1,17 @@
+---
+- name: Get device facts
+  hosts: 
+    - vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - juniper_junos_facts:
+        provider: "{{ provider_vault_data }}"
+  
+    - debug:
+        var: junos
+
+
