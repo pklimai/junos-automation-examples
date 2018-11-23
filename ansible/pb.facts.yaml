@@ -1,0 +1,29 @@
+---
+- name: Get device facts
+  hosts: 
+    - vMX
+  roles:
+    - Juniper.junos
+  connection: local
+  gather_facts: no
+
+  vars:
+    username: lab
+    password: lab123
+
+  tasks:
+    - juniper_junos_facts:
+        provider:
+          host: "{{ ansible_host }}"
+          user: "{{ username }}"
+          passwd: "{{ password }}"
+  
+    - debug:
+        # To display all variables
+        # var: vars
+
+        # To display facts collected by juniper_junos_facts
+        # Note: no "register" is needed; no explicit ansible_facts reference is needed
+        var: junos
+
+

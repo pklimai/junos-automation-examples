@@ -23,3 +23,10 @@ Retry failed playbook using .retry file:
 ansible-playbook pb.uptime.yaml --limit=@pb.uptime.retry
 ```
 
+Vault commands (use lab123 as password):
+```
+ansible-vault encrypt pb.facts.vault.yaml
+ansible-vault view pb.facts.vault.yaml
+ansible-playbook pb.facts.vault.yaml --ask-vault-pass
+```
+
