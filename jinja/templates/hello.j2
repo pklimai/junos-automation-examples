@@ -1,0 +1,3 @@
+{%- for iface_name, iface_descr in interfaces.items() %}
+set interfaces {{ iface_name }} description "{{ iface_descr }}"
+{%- endfor %}
