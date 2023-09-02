@@ -6,7 +6,7 @@ from lxml.etree import dump
 
 print("Open connection and print facts:")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-dev = Device(host="10.254.0.35", user="lab", passwd="lab123")
+dev = Device(host="192.168.65.37", user="lab", passwd="lab123")
 dev.open()
 pprint(dev.facts)
 
